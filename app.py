@@ -5,15 +5,13 @@ from dataclasses import dataclass
 from typing import List
 import math
  
-# ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Credit Score Simulator | FEC Paterson",
     page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded",
 )
- 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
@@ -95,7 +93,7 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif !important; }
 """, unsafe_allow_html=True)
  
  
-# ── Credit score model ────────────────────────────────────────────────────────
+# Credit score model 
 # FICO approximate weights:
 # Payment history     35 %
 # Credit utilization  30 %
@@ -197,8 +195,7 @@ def simulate_score(
  
     return scores
  
- 
-# ── Sidebar inputs ─────────────────────────────────────────────────────────────
+
 with st.sidebar:
     st.markdown("## 📋 Client Profile")
     st.markdown("---")
@@ -233,7 +230,6 @@ with st.sidebar:
         paying_off_collection = st.checkbox("Planning to pay off collection", value=False)
  
  
-# ── Simulate ───────────────────────────────────────────────────────────────────
 scores = simulate_score(
     current_score, months,
     on_time_streak, missed_payments_next,
@@ -248,8 +244,7 @@ start_band, start_color = score_band(current_score)
 end_band, end_color = score_band(final_score)
 delta_score = final_score - current_score
  
- 
-# ── Main layout ────────────────────────────────────────────────────────────────
+
 st.markdown("""
 <div class="fec-header">
   <div>
@@ -331,8 +326,6 @@ with col_chart:
     )
     st.plotly_chart(fig, width="stretch")
  
- 
-# ── Action breakdown ───────────────────────────────────────────────────────────
 st.markdown("---")
 st.markdown("### What's Driving Your Score")
  
@@ -419,7 +412,7 @@ for title, body in tips:
     </div>
     """, unsafe_allow_html=True)
  
-# ── Footer ─────────────────────────────────────────────────────────────────────
+
 st.markdown("---")
 st.markdown("""
 <div style="text-align:center;color:#888;font-size:0.8rem;padding:1rem;">
